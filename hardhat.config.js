@@ -1,5 +1,6 @@
 require("@nomicfoundation/hardhat-toolbox");
 require("dotenv").config();
+require("@nomiclabs/hardhat-etherscan");
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
@@ -121,5 +122,17 @@ module.exports = {
       accounts: [process.env.SEPOLIA_PRIVATE_KEY],
       chainId: 11155111,
     },
+  },
+  etherscan: {
+    apiKey: process.env.ETHERSCAN_API_KEY,
+  },
+  plugins: ["hardhat-gas-reporter"],
+  gasReporter: {
+    enabled: true, // Enable the reporter (default: true)
+    outputFile: "gas-report.txt", // Output file for gas usage reports (default: 'gas-report.txt')
+    maxMem: 100, // Maximum memory usage (default: 100 MB)
+    noColors: false, // Disable color formatting (default: false)
+    coinMarketCap: process.env.COINMARKETCAP_API_KEY, // CoinMarketCap API key for ETH price conversion (optional)
+    currency: "USD", // Currency for gas cost calculations (default: 'USD')
   },
 };
